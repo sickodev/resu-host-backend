@@ -1,22 +1,17 @@
 import {configDotenv} from "dotenv";
 
 type EnvironmentVariables = {
-    Port: number,
-    SupabaseUrl: string,
-    SupabaseServiceKey: string,
-    SupabaseBucket: string,
+    PORT: number,
+    SUPABASE_URL: string,
+    SUPABASE_SERVICE_KEY: string,
+    SUPABASE_BUCKET: string,
 }
 
-export function loadEnvironmentVariables():EnvironmentVariables {
-    configDotenv();
-    if(process.env.PORT === undefined) {
-        console.log("Environment variables not defined");
-        return process.exit(1);
-    }
-    return {
-        Port: Number(process.env.PORT),
-        SupabaseBucket: process.env.SUPABASE_BUCKET!,
-        SupabaseServiceKey: process.env.SUPABASE_SERVICE_KEY!,
-        SupabaseUrl: process.env.SUPABASE_URL!,
-    };
-}
+configDotenv();
+
+export const env:EnvironmentVariables = {
+    PORT: Number(process.env.PORT),
+    SUPABASE_URL: process.env.SUPABASE_URL!,
+    SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY!,
+    SUPABASE_BUCKET: process.env.SUPABASE_BUCKET!,
+};

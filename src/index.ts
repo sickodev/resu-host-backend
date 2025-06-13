@@ -1,8 +1,7 @@
 import { serve } from '@hono/node-server'
 import api from "./api.js";
-import {loadEnvironmentVariables} from "./utils/env.js";
+import {env} from "./utils/env.js";
 
-loadEnvironmentVariables();
 
 api.get('/', (c) => {
   return c.text('Hello Hono!')
@@ -10,7 +9,7 @@ api.get('/', (c) => {
 
 serve({
   fetch: api.fetch,
-  port: Number(process.env.PORT) || 8080,
+  port: env.PORT || 8080,
 }, (info) => {
   console.log(`Server is running on http://localhost:${info.port}`)
 })
