@@ -1,6 +1,7 @@
 import {Hono} from "hono";
 import ping from "./routes/ping.js";
 import {StatusCodes} from "http-status-codes";
+import upload from "./routes/upload.js";
 
 const api = new Hono().basePath("/api");
 
@@ -21,5 +22,6 @@ api.onError((err, c)=>{
 })
 
 api.route("/ping", ping);
+api.route("/upload", upload);
 
 export default api;
