@@ -1,8 +1,8 @@
 import { serve } from '@hono/node-server'
-import {configDotenv} from "dotenv";
 import api from "./api.js";
+import {loadEnvironmentVariables} from "./utils/env.js";
 
-configDotenv();
+loadEnvironmentVariables();
 
 api.get('/', (c) => {
   return c.text('Hello Hono!')
