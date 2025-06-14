@@ -158,15 +158,6 @@ MIT — feel free to use, modify, and share.
 
 Built by [@sickodev](https://github.com/sickodev)
 
-
----
-
-## 📜 License
-
-MIT — feel free to use, modify, and share.
-
----
-
 ## ✨ Author
 
 Built by [@sickodev](https://github.com/sickodev)
