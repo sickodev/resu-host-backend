@@ -1,8 +1,3 @@
-Sure! Here's the complete `README.md` content written entirely in **Markdown**:
-
----
-
-````markdown
 # Resu Host Backend 🦉
 
 [![Keep Render App Awake](https://github.com/sickodev/resu-host-backend/actions/workflows/ping.yml/badge.svg)](https://github.com/sickodev/resu-host-backend/actions/workflows/ping.yml)
