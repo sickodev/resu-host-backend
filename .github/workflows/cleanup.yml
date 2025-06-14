@@ -1,15 +1,28 @@
-name: Cleanup Expired Files
+name: Trigger Daily Cleanup
+
 on:
   schedule:
-    - cron: '0 1 * * *'
-  workflow_dispatch:
-
+    - cron: '0 3 * * *' # every day at 3 AM UTC
+  workflow_dispatch:     # allows manual run too
 
 jobs:
-  ping-cleanup:
+  cleanup:
     runs-on: ubuntu-latest
+
     steps:
-      - name: GET to cleanup
+      - name: Trigger cleanup API
         run: |
-          curl -X GET https://https://resu-host-backend.onrender.com/api/cleanup \
-          -H "Authorization: Bearer ${{secrets.CLEANUP_API_KEY }}"
+          echo "Calling cleanup endpoint..."
+          response=$(curl -s -X GET https://resu-host-backend.onrender.com/api/cleanup \
+            -H "Authorization: Bearer ${{ secrets.CLEANUP_API_KEY }}")
+
+          echo "Response:"
+          echo "$response"
+
+          purged=$(echo "$response" | jq -r '.purged')
+          if [ "$purged" = "null" ]; then
+            echo "❌ Failed to get 'purged' count from response."
+            exit 1
+          fi
+
+          echo "✅ Cleanup complete. Purged $purged files."
