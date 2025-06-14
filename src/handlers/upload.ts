@@ -61,13 +61,13 @@ export async function uploadFile(c: Context) {
     }
 
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 15);
-    const shortlink = await shorten(prisma);
+    const shortLink = await shorten(prisma);
 
     await prisma.upload.create({
         data: {
             filename: file.name,
             path: publicURL,
-            shortlink,
+            shortlink:shortLink,
             expiresAt,
         },
     })
@@ -77,7 +77,7 @@ export async function uploadFile(c: Context) {
             status: 200,
             message: "Upload complete",
             data: {
-                filePath: shortlink,
+                filePath: `${env.APP_HOST}/${shortLink}`,
                 fileName: fileName,
                 expiresAt,
             },
