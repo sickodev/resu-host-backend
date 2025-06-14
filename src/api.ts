@@ -2,8 +2,13 @@ import {Hono} from "hono";
 import ping from "./routes/ping.js";
 import {StatusCodes} from "http-status-codes";
 import upload from "./routes/upload.js";
+import {cors} from "hono/cors";
 
 const api = new Hono().basePath("/api");
+
+api.use('*',cors({
+    origin: '*',
+}))
 
 api.notFound((c)=>{
     return c.json({
