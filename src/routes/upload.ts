@@ -1,8 +1,9 @@
 import {Hono} from "hono";
-import {getUploadPing} from "../handlers/upload.js";
+import {getUploadPing, uploadFile} from "../handlers/upload.js";
 
 const upload = new Hono();
 
 upload.get("/", getUploadPing)
+upload.post("/", uploadFile)
 
 export default upload;
