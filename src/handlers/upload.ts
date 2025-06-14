@@ -2,6 +2,7 @@ import type {Context} from "hono";
 import {StatusCodes} from "http-status-codes";
 import {env} from "../utils/env.js";
 import prisma from "../lib/prisma.js";
+import {shorten} from "../utils/shorten.js";
 
 export function getUploadPing(c:Context) {
     return c.json({
@@ -60,12 +61,13 @@ export async function uploadFile(c: Context) {
     }
 
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 15);
+    const shortlink = await shorten(prisma);
 
     await prisma.upload.create({
         data: {
             filename: file.name,
             path: publicURL,
-            shortlink: "temp",
+            shortlink,
             expiresAt,
         },
     })
@@ -75,8 +77,9 @@ export async function uploadFile(c: Context) {
             status: 200,
             message: "Upload complete",
             data: {
-                filePath: uploadURL,
+                filePath: shortlink,
                 fileName: fileName,
+                expiresAt,
             },
             metadata,
         },
