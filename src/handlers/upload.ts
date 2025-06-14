@@ -61,7 +61,6 @@ export async function uploadFile(c: Context) {
 
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 15);
 
-    // @ts-ignore
     await prisma.upload.create({
         data: {
             filename: file.name,
