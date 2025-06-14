@@ -3,6 +3,7 @@ import ping from "./routes/ping.js";
 import {StatusCodes} from "http-status-codes";
 import upload from "./routes/upload.js";
 import {cors} from "hono/cors";
+import {cleanup} from "./routes/cleanup.js";
 
 const api = new Hono().basePath("/api");
 
@@ -28,5 +29,6 @@ api.onError((err, c)=>{
 
 api.route("/ping", ping);
 api.route("/upload", upload);
+api.route("/cleanup", cleanup);
 
 export default api;

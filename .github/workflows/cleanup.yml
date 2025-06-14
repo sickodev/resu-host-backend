@@ -1,0 +1,15 @@
+name: cleanup.yml
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+
+jobs:
+  ping-cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GET to cleanup
+        run: |
+          curl -X GET https://https://resu-host-backend.onrender.com/api/cleanup \
+          -H "Authorization: Bearer ${{secrets.CLEANUP_API_KEY }}"

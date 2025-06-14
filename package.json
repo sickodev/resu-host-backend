@@ -5,7 +5,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "cleanup": "ts-node src/jobs/cleanup.ts"
+    "cleanup": "ts-node src/handlers/cleanup.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.4",
