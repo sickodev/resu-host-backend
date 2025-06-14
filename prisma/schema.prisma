@@ -12,6 +12,7 @@ model Upload {
   id        String   @id @default(uuid(7))
   filename  String
   path      String
+  shortlink String?
   createdAt DateTime @default(now())
   expiresAt DateTime
 }

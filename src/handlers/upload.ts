@@ -65,6 +65,7 @@ export async function uploadFile(c: Context) {
         data: {
             filename: file.name,
             path: publicURL,
+            shortlink: "temp",
             expiresAt,
         },
     })
