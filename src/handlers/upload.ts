@@ -1,6 +1,7 @@
 import type {Context} from "hono";
 import {StatusCodes} from "http-status-codes";
 import {env} from "../utils/env.js";
+import prisma from "../lib/prisma.js";
 
 export function getUploadPing(c:Context) {
     return c.json({
@@ -25,7 +26,7 @@ export async function uploadFile(c: Context) {
 
     const fileName = `${Date.now()}-${file.name}`;
     const uploadURL = `${env.SUPABASE_URL}/storage/v1/object/${env.SUPABASE_BUCKET}/${fileName}`;
-
+    const publicURL = `${env.SUPABASE_URL}/storage/v1/object/public/${env.SUPABASE_BUCKET}/${fileName}`
     const buffer = Buffer.from(await file.arrayBuffer());
 
     const uploadResult = await fetch(uploadURL, {
@@ -58,12 +59,23 @@ export async function uploadFile(c: Context) {
         );
     }
 
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 15);
+
+    // @ts-ignore
+    await prisma.upload.create({
+        data: {
+            filename: file.name,
+            path: publicURL,
+            expiresAt,
+        },
+    })
+
     return c.json(
         {
             status: 200,
             message: "Upload complete",
             data: {
-                filePath: `${env.SUPABASE_URL}/storage/v1/object/public/${env.SUPABASE_BUCKET}/${fileName}`,
+                filePath: uploadURL,
                 fileName: fileName,
             },
             metadata,
