@@ -1,11 +1,16 @@
 import { serve } from '@hono/node-server'
 import api from "./api.js";
 import {env} from "./utils/env.js";
+import {cors} from 'hono/cors'
 
 
 api.get('/', (c) => {
   return c.text('Hello Hono!')
 })
+
+api.use('*',cors({
+  origin: ["http://localhost:3000"],
+}))
 
 serve({
   fetch: api.fetch,
