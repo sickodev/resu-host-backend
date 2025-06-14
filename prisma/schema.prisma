@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,10 +9,10 @@ datasource db {
 }
 
 model Upload {
-  id String @id @default(uuid(7))
-  filename String
-  shortlink String
-  path String
+  id        String   @id @default(uuid(7))
+  filename  String
+  shortlink String   @unique
+  path      String
   createdAt DateTime @default(now())
   expiresAt DateTime
 }
