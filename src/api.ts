@@ -5,11 +5,7 @@ import upload from "./routes/upload.js";
 import {cors} from "hono/cors";
 import {cleanup} from "./routes/cleanup.js";
 
-const api = new Hono().basePath("/api");
-
-api.use('*',cors({
-    origin: '*',
-}))
+const api = new Hono()
 
 api.notFound((c)=>{
     return c.json({
