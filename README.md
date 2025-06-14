@@ -157,7 +157,3 @@ MIT — feel free to use, modify, and share.
 ## ✨ Author
 
 Built by [@sickodev](https://github.com/sickodev)
-
-## ✨ Author
-
-Built by [@sickodev](https://github.com/sickodev)
