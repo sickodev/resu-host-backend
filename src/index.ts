@@ -3,14 +3,13 @@ import api from "./api.js";
 import {env} from "./utils/env.js";
 import {cors} from 'hono/cors'
 
+api.use('*',cors({
+  origin: '*',
+}))
 
 api.get('/', (c) => {
   return c.text('Hello Hono!')
 })
-
-api.use('*',cors({
-  origin: '*',
-}))
 
 serve({
   fetch: api.fetch,
