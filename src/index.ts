@@ -8,7 +8,10 @@ import {redirect} from "./routes/redirect.js";
 const app = new Hono();
 
 app.use('*',cors({
-  origin: '*',
+  origin: [
+      "http://localhost:5173",
+      "https://resu-host.vercel.app",
+  ],
 }))
 app.route("/api", api)
 app.route("/", redirect)
