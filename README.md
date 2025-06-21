@@ -14,6 +14,7 @@ This is the backend service for Resu Host, built using [Hono](https://hono.dev) 
 - 🧬 Prisma integration for metadata persistence (In Progress)
 - 🕰 GitHub Actions uptime pinger for Render
 - 🌐 CORS-enabled for frontend integration
+- ⏳ Custom File Expiry
 
 ---
 
@@ -133,9 +134,6 @@ Here’s what’s planned next for the Resu Host backend:
 
 - 🔗 **Shorter File Links**  
   Replace long public URLs with compact, secure shortlinks (e.g. `resu.host/abc123`)
-
-- ⏳ **Custom File Expiry**  
-  Allow users to set custom expiration periods per upload (e.g. 1 day, 7 days, 30 days)
 
 - 📊 **Dashboard for Analytics**  
   A secure interface to:
