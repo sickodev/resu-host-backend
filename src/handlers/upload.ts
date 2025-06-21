@@ -14,6 +14,7 @@ export function getUploadPing(c:Context) {
 export async function uploadFile(c: Context) {
     const body = await c.req.parseBody();
     const file = body.file;
+    const expiresIn = parseInt(body.expiresIn as string) || 15;
 
     if (!file || !(file instanceof File)) {
         return c.json(
@@ -60,7 +61,7 @@ export async function uploadFile(c: Context) {
         );
     }
 
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 15);
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * expiresIn);
     const shortLink = await shorten(prisma);
 
     await prisma.upload.create({
